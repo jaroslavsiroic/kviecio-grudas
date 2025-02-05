@@ -16,10 +16,10 @@ const Logo = ({ src }: { src?: string }) => {
     logo_text,
     title,
   }: {
-    logo: string;
-    logo_darkmode: string;
-    logo_width: any;
-    logo_height: any;
+    logo?: string;
+    logo_darkmode?: string;
+    logo_width?: any;
+    logo_height?: any;
     logo_text: string;
     title: string;
   } = config.site;

@@ -1,7 +1,5 @@
 "use client";
 
-import { getUserDetails } from "@/lib/shopify";
-import { user } from "@/lib/shopify/types";
 import { Listbox, Transition } from "@headlessui/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
@@ -10,38 +8,38 @@ import { Fragment, useEffect, useState } from "react";
 import Gravatar from "react-gravatar";
 import { BsPerson } from "react-icons/bs";
 
-export const fetchUser = async () => {
-  try {
-    const accessToken = Cookies.get("token");
-    if (!accessToken) {
-      return null;
-    } else {
-      const userDetails: user = await getUserDetails(accessToken);
-      const userInfo = userDetails.customer;
-      return userInfo;
-    }
-  } catch (error) {
-    // console.log("Error fetching user details:", error);
-    return null;
-  }
-};
+// export const fetchUser = async () => {
+//   try {
+//     const accessToken = Cookies.get("token");
+//     if (!accessToken) {
+//       return null;
+//     } else {
+//       const userDetails: user = await getUserDetails(accessToken);
+//       const userInfo = userDetails.customer;
+//       return userInfo;
+//     }
+//   } catch (error) {
+//     // console.log("Error fetching user details:", error);
+//     return null;
+//   }
+// };
 
 const NavUser = () => {
   const pathname = usePathname();
   const [user, setUser] = useState<any>();
 
-  useEffect(() => {
-    const getUser = async () => {
-      const userInfo = await fetchUser();
-      setUser(userInfo);
-    };
-    getUser();
-  }, [pathname]);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const userInfo = await fetchUser();
+  //     setUser(userInfo);
+  //   };
+  //   getUser();
+  // }, [pathname]);
 
   const handleLogout = () => {
-    Cookies.remove("token");
-    localStorage.removeItem("user");
-    setUser(null);
+    // Cookies.remove("token");
+    // localStorage.removeItem("user");
+    // setUser(null);
   };
 
   return (
@@ -52,10 +50,10 @@ const NavUser = () => {
             <Listbox.Button className="relative cursor-pointer text-left sm:text-xs flex items-center justify-center">
               <div className="flex items-center gap-x-1">
                 <div className="h-6 w-6 border border-darkmode-border dark:border-border rounded-full">
-                  <Gravatar
+                  {/* <Gravatar
                     email={user?.email}
                     style={{ borderRadius: "50px" }}
-                  />
+                  /> */}
                 </div>
 
                 <div className="leading-none max-md:hidden">

@@ -2,7 +2,6 @@
 
 import { SortFilterItem, sorting } from "@/lib/constants";
 import { createUrl } from "@/lib/utils";
-import ProductFilters from "@/partials/ProductFilters";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCollapse } from "react-collapsed";
@@ -159,14 +158,14 @@ const ProductLayouts = ({
                     {...getCollapseProps()}
                   >
                     <div className="pb-8">
-                      <ProductFilters
+                      {/* <ProductFilters
                         categories={categories}
                         vendors={vendors}
                         tags={tags}
                         maxPriceData={maxPriceData}
                         vendorsWithCounts={vendorsWithCounts}
                         categoriesWithCounts={categoriesWithCounts}
-                      />
+                      /> */}
                     </div>
                   </section>
                 </div>

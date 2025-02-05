@@ -1,6 +1,5 @@
 "use client";
 
-import { CustomerError } from "@/lib/shopify/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -92,7 +91,7 @@ const Login = () => {
                   />
                 </div>
 
-                {errorMessages.map((error: CustomerError) => (
+                {/* {errorMessages.map((error) => (
                   <p
                     key={error.code}
                     className="font-medium text-red-500 truncate mt-2"
@@ -102,7 +101,7 @@ const Login = () => {
                       ? `${error.message}`
                       : "Invalid Email or Password"}
                   </p>
-                ))}
+                ))} */}
 
                 <button
                   type="submit"

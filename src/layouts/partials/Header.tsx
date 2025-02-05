@@ -74,7 +74,7 @@ const renderMenuItem = (
   );
 };
 
-const Header: React.FC<{ children: any }> = ({ children }) => {
+const Header: React.FC = () => {
   const [navbarShadow, setNavbarShadow] = useState(false);
   const { main }: { main: INavigationLink[] } = menu;
   const { navigation_button, settings } = config;
@@ -120,7 +120,7 @@ const Header: React.FC<{ children: any }> = ({ children }) => {
               htmlFor="nav-toggle"
               className="order-3 cursor-pointer flex items-center text-dark dark:text-white lg:order-1"
             >
-              <span className="mr-2 font-medium">Pages</span>
+              <span className="mr-2 font-medium">Puslapiai</span>
               <button
                 id="nav-toggle"
                 className="focus:outline-none"
@@ -190,13 +190,13 @@ const Header: React.FC<{ children: any }> = ({ children }) => {
           </div>
         </div>
 
-        <div className="max-lg:mt-4 w-full lg:w-[45%] xl:w-[60%] lg:order-2 order-3">
+        {/* <div className="max-lg:mt-4 w-full lg:w-[45%] xl:w-[60%] lg:order-2 order-3">
           {settings.search && <SearchBar />}
-        </div>
+        </div> */}
 
         <div className="order-2 lg:order-3 ml-auto flex items-center lg:ml-0">
           <ThemeSwitcher className="mr-4 md:mr-6" />
-          <Suspense fallback={children[0]}>{children[1]}</Suspense>
+          {/* <Suspense fallback={children[0]}>{children[1]}</Suspense> */}
 
           {settings.account && (
             <div className="ml-4 md:ml-6">

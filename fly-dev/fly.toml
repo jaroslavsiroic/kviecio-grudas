@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for kviecio-grudas-test-pb on 2025-01-23T18:42:22+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'kviecio-grudas-test-pb'
+primary_region = 'waw'
+
+[build.args]
+  PB_VERSION="0.24.4"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
+
+[mounts]
+  destination = "/pb/pb_data"
+  source = "pb_data"

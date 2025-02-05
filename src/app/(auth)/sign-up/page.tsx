@@ -1,6 +1,5 @@
 "use client";
 
-import { CustomerError } from "@/lib/shopify/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -109,14 +108,14 @@ const SignUp = () => {
                   />
                 </div>
 
-                {errorMessages.map((error: CustomerError) => (
+                {/* {errorMessages.map((error: CustomerError) => (
                   <p
                     key={error.code}
                     className="ont-medium text-red-500 truncate mt-2"
                   >
                     *{error.message}
                   </p>
-                ))}
+                ))} */}
 
                 <button
                   type="submit"

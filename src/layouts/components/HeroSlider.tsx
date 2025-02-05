@@ -1,6 +1,5 @@
 "use client";
 import ImageFallback from "@/helpers/ImageFallback";
-import { Product } from "@/lib/shopify/types";
 import Link from "next/link";
 // Import Swiper styles
 import "swiper/css";
@@ -9,7 +8,18 @@ import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const HeroSlider = ({ products }: { products: Product[] }) => {
+export interface HeroPost {
+  title: string;
+  description: string;
+  handle?: string;
+  image?: string;
+}
+
+export interface Props {
+  posts: HeroPost[];
+}
+
+const HeroSlider: React.FC<Props> = ({ posts }) => {
   return (
     <>
       <Swiper
@@ -20,8 +30,8 @@ const HeroSlider = ({ products }: { products: Product[] }) => {
         }}
         modules={[Pagination]}
       >
-        {products?.map((item: Product) => (
-          <SwiperSlide key={item.id}>
+        {posts?.map((item, i) => (
+          <SwiperSlide key={i}>
             <div className="row items-center px-7 xl:px-16">
               <div className="sm:col-12 lg:col-6 order-2 lg:order-0">
                 <div className="text-center py-10 lg:py-0">
@@ -47,9 +57,9 @@ const HeroSlider = ({ products }: { products: Product[] }) => {
               </div>
 
               <div className="sm:col-12 lg:col-6">
-                {item.featuredImage && (
+                {item.image && (
                   <ImageFallback
-                    src={item.featuredImage.url}
+                    src={item.image}
                     className="mx-auto w-[388px] lg:w-full"
                     width={507}
                     height={385}

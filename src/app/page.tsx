@@ -1,38 +1,45 @@
 /* eslint-disable react/no-unescaped-entities */
 import CollectionsSlider from "@/components/CollectionsSlider";
-import HeroSlider from "@/components/HeroSlider";
+import HeroSlider, { HeroPost } from "@/components/HeroSlider";
 import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
 import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 import config from "@/config/config.json";
 import { getListPage } from "@/lib/contentParser";
-import { getCollectionProducts, getCollections } from "@/lib/shopify";
 import CallToAction from "@/partials/CallToAction";
-import FeaturedProducts from "@/partials/FeaturedProducts";
 import SeoMeta from "@/partials/SeoMeta";
 import { Suspense } from "react";
 
-const { collections } = config.shopify;
+// const ShowHeroSlider = async () => {
+//   const sliderImages = await getCollectionProducts({
+//     collection: collections.hero_slider,
+//   });
+//   const { products } = sliderImages;
+//   return <HeroSlider products={} />;
+// };
 
-const ShowHeroSlider = async () => {
-  const sliderImages = await getCollectionProducts({
-    collection: collections.hero_slider,
-  });
-  const { products } = sliderImages;
-  return <HeroSlider products={products} />;
-};
+// const ShowCollections = async () => {
+//   const collections = await getCollections();
+//   return <CollectionsSlider collections={collections} />;
+// };
 
-const ShowCollections = async () => {
-  const collections = await getCollections();
-  return <CollectionsSlider collections={collections} />;
-};
+// const ShowFeaturedProducts = async () => {
+//   const { pageInfo, products } = await getCollectionProducts({
+//     collection: collections.featured_products,
+//     reverse: false,
+//   });
+//   return <FeaturedProducts products={products} />;
+// };
 
-const ShowFeaturedProducts = async () => {
-  const { pageInfo, products } = await getCollectionProducts({
-    collection: collections.featured_products,
-    reverse: false,
-  });
-  return <FeaturedProducts products={products} />;
-};
+const products: HeroPost[] = [
+  {
+    title: "Product 1",
+    description: "Description for Product 1",
+  },
+  {
+    title: "Product 2",
+    description: "Description for Product 2",
+  },
+];
 
 const Home = () => {
   const callToAction = getListPage("sections/call-to-action.md");
@@ -44,7 +51,7 @@ const Home = () => {
         <div className="container">
           <div className="bg-gradient py-10 rounded-md">
             <Suspense>
-              <ShowHeroSlider />
+              <HeroSlider posts={products} />
             </Suspense>
           </div>
         </div>
@@ -58,7 +65,7 @@ const Home = () => {
           </div>
           <Suspense fallback={<SkeletonCategory />}>
             {/* @ts-ignore */}
-            <ShowCollections />
+            {/* <ShowCollections /> */}
           </Suspense>
         </div>
       </section>
@@ -71,7 +78,7 @@ const Home = () => {
             <p className="md:h5">Explore Today's Featured Picks!</p>
           </div>
           <Suspense fallback={<SkeletonFeaturedProducts />}>
-            <ShowFeaturedProducts />
+            {/* <ShowFeaturedProducts /> */}
           </Suspense>
         </div>
       </section>

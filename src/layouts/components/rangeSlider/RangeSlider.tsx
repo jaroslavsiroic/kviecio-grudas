@@ -12,8 +12,6 @@ const RangeSlider = ({
 }: {
   maxPriceData: { amount: string; currencyCode: string };
 }) => {
-  const { currencyCode, currencySymbol } = config.shopify;
-
   // const [minValue, setMinValue] = useState(0);
   // const [maxValue, setMaxValue] = useState(0);
   const [minValue2, setMinValue2] = useState(0);
@@ -38,12 +36,12 @@ const RangeSlider = ({
     <div>
       <div className="flex justify-between">
         <p>
-          {currencySymbol}
-          {minValue2} {maxPriceData?.currencyCode || currencyCode}
+          {/* {currencySymbol} */}
+          {minValue2} {maxPriceData?.currencyCode}
         </p>
         <p>
-          {currencySymbol}
-          {maxValue2} {maxPriceData?.currencyCode || currencyCode}
+          {/* {currencySymbol} */}
+          {maxValue2} {maxPriceData?.currencyCode}
         </p>
       </div>
 
