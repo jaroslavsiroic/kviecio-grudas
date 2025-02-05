@@ -10,6 +10,7 @@ const nextConfig = {
   trailingSlash: config.site.trailing_slash,
   output: "export",
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

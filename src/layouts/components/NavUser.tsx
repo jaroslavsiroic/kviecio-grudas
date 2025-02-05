@@ -1,6 +1,8 @@
 "use client";
 
+import { getUser, isLoggedIn, logoutUser } from "@/lib/pocketbase";
 import { Listbox, Transition } from "@headlessui/react";
+import Avvvatars from "avvvatars-react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,8 +28,11 @@ import { BsPerson } from "react-icons/bs";
 
 const NavUser = () => {
   const pathname = usePathname();
-  const [user, setUser] = useState<any>();
+  const { data: userIsLoggedIn } = isLoggedIn();
+  const user = getUser();
+  const { mutate: logout } = logoutUser();
 
+  console.log(user);
   // useEffect(() => {
   //   const getUser = async () => {
   //     const userInfo = await fetchUser();
@@ -46,15 +51,10 @@ const NavUser = () => {
     <>
       <Listbox onChange={handleLogout}>
         <div className="relative">
-          {user ? (
+          {userIsLoggedIn ? (
             <Listbox.Button className="relative cursor-pointer text-left sm:text-xs flex items-center justify-center">
-              <div className="flex items-center gap-x-1">
-                <div className="h-6 w-6 border border-darkmode-border dark:border-border rounded-full">
-                  {/* <Gravatar
-                    email={user?.email}
-                    style={{ borderRadius: "50px" }}
-                  /> */}
-                </div>
+              <div className="flex items-center gap-x-2">
+                <Avvvatars value={user?.email} size={20} style="shape" />
 
                 <div className="leading-none max-md:hidden">
                   <div className="flex items-center">
@@ -74,7 +74,7 @@ const NavUser = () => {
                       />
                     </svg>
                   </div>
-                  {/* <p className="text-[8px]">Orders & Account</p> */}
+                  <p className="text-[8px]">Naudotojo paskyra</p>
                 </div>
               </div>
             </Listbox.Button>
@@ -97,7 +97,7 @@ const NavUser = () => {
             <Listbox.Options className="z-20 text-center absolute w-full">
               <Listbox.Option value={"Logout"}>
                 <button className="btn btn-primary max-md:btn-sm mt-2">
-                  Logout
+                  Atsijungti
                 </button>
               </Listbox.Option>
             </Listbox.Options>
