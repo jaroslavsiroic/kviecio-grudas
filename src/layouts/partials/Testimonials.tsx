@@ -81,13 +81,15 @@ const Testimonials = ({
                     />
                     <div className="mt-11 flex flex-col items-center">
                       <div className="text-dark dark:text-white mb-4">
-                        <ImageFallback
-                          height={50}
-                          width={50}
-                          className="rounded-full"
-                          src={item.avatar}
-                          alt={item.name}
-                        />
+                        {item?.avatar && (
+                          <ImageFallback
+                            height={50}
+                            width={50}
+                            className="rounded-full"
+                            src={item.avatar}
+                            alt={item.name}
+                          />
+                        )}
                       </div>
 
                       <h3

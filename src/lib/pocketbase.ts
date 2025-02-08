@@ -1,3 +1,5 @@
+"use client";
+
 import {
   QueryClient,
   useMutation,
@@ -8,9 +10,11 @@ import {
 import PocketBase from "pocketbase";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { Testimonial } from "@/types";
+import { config } from "process";
 
 // initialise client
-export const pb = new PocketBase("https://kviecio-grudas-test-pb.fly.dev");
+export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 export function useDailyMeditation(date: string) {
   return useQuery({
@@ -19,8 +23,17 @@ export function useDailyMeditation(date: string) {
       return await pb
         .collection("daily_meditation")
         .getFirstListItem(
-          `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`
+          `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
         );
+    },
+  });
+}
+
+export function useTestimonials() {
+  return useQuery<Testimonial[]>({
+    queryKey: ["testimonials"],
+    queryFn: async () => {
+      return await pb.collection("testimonials").getFullList();
     },
   });
 }
@@ -34,16 +47,36 @@ export function createUser() {
       passwordConfirm: string;
       email: string;
       emailVisibility: boolean;
-      firstName: string;
-      lastName: string;
+      name: string;
+      info: any;
     }) => {
       await pb.collection("users").create(data);
+
+      const options = {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "api-key": process.env.NEXT_PUBLIC_BREVO_API_KEY,
+        },
+        body: JSON.stringify({
+          //TODO finish this one
+          attributes: {
+            WANT2GETBOOKREAD: true, // TODO add this to the form
+            FRATERNITYSTATUS: "status here",
+          },
+          updateEnabled: false,
+          email: data.email,
+        }),
+      };
+
+      await fetch("https://api.brevo.com/v3/contacts", options);
 
       // (optional) send an email verification request
       await pb.collection("users").requestVerification(data.email);
 
       toast.success("Naudotojas sukurtas sėkmingai");
-      router.replace("/login");
+      router.replace("/");
     },
   });
 }

@@ -1,13 +1,17 @@
+"use client";
+
 /* eslint-disable react/no-unescaped-entities */
 import CollectionsSlider from "@/components/CollectionsSlider";
 import HeroSlider, { HeroPost } from "@/components/HeroSlider";
 import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
 import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 import config from "@/config/config.json";
-import { getListPage } from "@/lib/contentParser";
+import { useTestimonials } from "@/lib/pocketbase";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
+import Testimonials from "@/partials/Testimonials";
 import { Suspense } from "react";
+import { BiLoaderAlt } from "react-icons/bi";
 
 // const ShowHeroSlider = async () => {
 //   const sliderImages = await getCollectionProducts({
@@ -42,7 +46,8 @@ const products: HeroPost[] = [
 ];
 
 const Home = () => {
-  const callToAction = getListPage("sections/call-to-action.md");
+  const { data: testimonials, isLoading: testimonialsLoading } =
+    useTestimonials();
 
   return (
     <>
@@ -82,8 +87,14 @@ const Home = () => {
           </Suspense>
         </div>
       </section>
+      {testimonialsLoading && (
+        <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
+      )}
+      {testimonials && (
+        <Testimonials title={"Atsiliepimai"} testimonials={testimonials} />
+      )}
 
-      <CallToAction data={callToAction} />
+      {/* <CallToAction data={callToAction} /> */}
     </>
   );
 };

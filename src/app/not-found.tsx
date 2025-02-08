@@ -4,7 +4,7 @@ import Link from "next/link";
 const NotFound = async () => {
   return (
     <>
-      <SeoMeta title={"Page Not Found"} />
+      <SeoMeta title={"Puslapis nerastas"} />
       <section className="section-sm text-center">
         <div className="container">
           <div className="row justify-center">
@@ -12,15 +12,15 @@ const NotFound = async () => {
               <span className="text-[8rem] block font-bold text-dark dark:text-darkmode-dark">
                 404
               </span>
-              <h1 className="h2 mb-4">Page not found</h1>
+              <h1 className="h2 mb-4">Puslapis nerastas</h1>
               <div className="content">
                 <p>
-                  The page you are looking for might have been removed, had its
-                  name changed, or is temporarily unavailable.
+                  Puslapis, kurio ieškote, gali būti pašalintas, buvo pakeistas
+                  jo pavadinimas arba jis laikinai nepasiekiamas.
                 </p>
               </div>
               <Link href="/" className="btn btn-primary mt-8">
-                Back to home
+                Grįžti į pagrindinį puslapį
               </Link>
             </div>
           </div>

@@ -6,46 +6,14 @@ import Avvvatars from "avvvatars-react";
 import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useEffect, useState } from "react";
-import Gravatar from "react-gravatar";
+import { Fragment } from "react";
 import { BsPerson } from "react-icons/bs";
-
-// export const fetchUser = async () => {
-//   try {
-//     const accessToken = Cookies.get("token");
-//     if (!accessToken) {
-//       return null;
-//     } else {
-//       const userDetails: user = await getUserDetails(accessToken);
-//       const userInfo = userDetails.customer;
-//       return userInfo;
-//     }
-//   } catch (error) {
-//     // console.log("Error fetching user details:", error);
-//     return null;
-//   }
-// };
 
 const NavUser = () => {
   const pathname = usePathname();
   const { data: userIsLoggedIn } = isLoggedIn();
   const user = getUser();
-  const { mutate: logout } = logoutUser();
-
-  console.log(user);
-  // useEffect(() => {
-  //   const getUser = async () => {
-  //     const userInfo = await fetchUser();
-  //     setUser(userInfo);
-  //   };
-  //   getUser();
-  // }, [pathname]);
-
-  const handleLogout = () => {
-    // Cookies.remove("token");
-    // localStorage.removeItem("user");
-    // setUser(null);
-  };
+  const { mutate: handleLogout } = logoutUser();
 
   return (
     <>

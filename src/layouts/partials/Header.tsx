@@ -6,6 +6,7 @@ import SearchBar from "@/components/SearchBar";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import config from "@/config/config.json";
 import menu from "@/config/menu.json";
+import { isLoggedIn, logoutUser } from "@/lib/pocketbase";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
@@ -75,6 +76,9 @@ const renderMenuItem = (
 };
 
 const Header: React.FC = () => {
+  const { data: userIsLoggedIn } = isLoggedIn();
+  const { mutate: logout } = logoutUser();
+
   const [navbarShadow, setNavbarShadow] = useState(false);
   const { main }: { main: INavigationLink[] } = menu;
   const { navigation_button, settings } = config;

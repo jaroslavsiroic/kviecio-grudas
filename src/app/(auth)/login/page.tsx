@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
-import { FormData } from "../sign-up/page";
 import { loginUser } from "@/lib/pocketbase";
 import { useFormik } from "formik";
 
