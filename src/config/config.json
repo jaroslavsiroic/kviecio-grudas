@@ -1,11 +1,15 @@
 {
   "site": {
     "title": "Kviečio grūdas",
-    "base_url": "https://tf-commerceplate.netlify.app/",
+    "base_url": "https://kvieciogrudas.com/",
     "base_path": "/",
     "trailing_slash": false,
-    "favicon": "/images/favicon.png",
-    "logo_text": "Kviečio grūdas"
+    "favicon": "/images/favicon.ico",
+    "logo_text": "Kviečio grūdas",
+    "logo": "/images/logo.png",
+    "logo_darkmode": "/images/logo.png",
+    "logo_width": "125",
+    "logo_height": "50"
   },
 
   "settings": {
@@ -22,7 +26,7 @@
 
   "params": {
     "contact_form_action": "#",
-    "copyright": "Designed And Developed by [Zeon Studio](https://zeon.studio)"
+    "copyright": "Kviečio grūdas"
   },
 
   "navigation_button": {
@@ -32,8 +36,8 @@
   },
 
   "metadata": {
-    "meta_author": "Zeon Studio",
+    "meta_author": "Kviečio grūdas",
     "meta_image": "/images/og-image.png",
-    "meta_description": "Shopify Storefront Boilerplate"
+    "meta_description": "Tikėti. Laisvėti. Dalintis. Būti."
   }
 }

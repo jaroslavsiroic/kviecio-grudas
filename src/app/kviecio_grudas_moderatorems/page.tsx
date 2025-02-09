@@ -2,7 +2,7 @@
 
 import MDXContent from "@/helpers/MDXContent";
 import { getListPage, getSinglePage } from "@/lib/contentParser";
-import { useDailyMeditation } from "@/lib/pocketbase";
+import { kgModeratorQuery, useDailyMeditation } from "@/lib/pocketbase";
 import PageHeader from "@/partials/PageHeader";
 import SeoMeta from "@/partials/SeoMeta";
 import { RegularPage } from "@/types";
@@ -12,13 +12,10 @@ import { BiLoaderAlt } from "react-icons/bi";
 
 // For all regular pages
 const Page = () => {
-  const params = useSearchParams();
-  const date = params.get("d") ?? format(new Date(), "yyyy-MM-dd");
-  const { data, isLoading, isError } = useDailyMeditation(date);
-
+  const { data, isLoading } = kgModeratorQuery();
   return (
     <>
-      <PageHeader title={"Dienos grūdas"} />
+      <PageHeader title={"Grupelių moderatorėms"} />
       <section className="section">
         <div className="container">
           <div className="content">

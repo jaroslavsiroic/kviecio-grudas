@@ -1,49 +1,61 @@
 {
   "main": [
     {
-      "name": "Home",
+      "name": "Pagrindinis puslapis",
       "url": "/"
     },
     {
-      "name": "Products",
-      "url": "/products"
-    },
-    {
-      "name": "Pages",
+      "name": "Kviečio grūdo programa",
       "url": "",
       "hasChildren": true,
       "children": [
         {
-          "name": "About",
-          "url": "/about"
+          "name": "Kviečio grūdo iššūkis trumpai",
+          "url": "/kviecio_grudas_trumpai"
         },
         {
-          "name": "Contact",
-          "url": "/contact"
+          "name": "Programos aprašymas",
+          "url": "/kviecio_grudas_aprasymas"
         },
         {
-          "name": "404 Page",
-          "url": "/404"
+          "name": "Kaip atsirado Kviečio grūdas",
+          "url": "/kviecio_grudas_istorija"
+        },
+        {
+          "name": "Grupelių moderatorėms",
+          "url": "/kviecio_grudas_moderatorems"
+        },
+        {
+          "name": "Rekomenduojame",
+          "url": "/kviecio_grudas_rekomendacijos"
         }
       ]
     },
     {
-      "name": "Contact",
-      "url": "/contact"
+      "name": "Dienos grūdas",
+      "url": "/dienos_grudas"
+    },
+    {
+      "name": "Apie kongregacijos seseris",
+      "url": "/apie_seseris"
+    },
+    {
+      "name": "Prisidėk savo auka",
+      "url": "/aukoti"
     }
   ],
   "footer": [
     {
-      "name": "About",
-      "url": "/about"
+      "name": "Kviečio grūdas trumpai",
+      "url": "/kviecio_grudas_trumpai"
     },
     {
-      "name": "Products",
-      "url": "/products"
+      "name": "Prisidėk savo auka",
+      "url": "/aukoti"
     },
     {
-      "name": "Contact",
-      "url": "/contact"
+      "name": "Kontaktai",
+      "url": "/kontaktai"
     }
   ],
   "footerCopyright": [

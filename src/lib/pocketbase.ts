@@ -17,14 +17,21 @@ import { config } from "process";
 export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 export function useDailyMeditation(date: string) {
+  const router = useRouter();
   return useQuery({
     queryKey: ["daily_meditation"],
     queryFn: async () => {
-      return await pb
-        .collection("daily_meditation")
-        .getFirstListItem(
-          `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
-        );
+      if (pb.authStore.isValid) {
+        return await pb
+          .collection("dienos_grudas")
+          .getFirstListItem(
+            `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
+          );
+      } else {
+        toast.warning("Prašome prisijungti, kad peržiurėti dienos grūdą");
+        router.replace("/login");
+        return Promise.resolve(null);
+      }
     },
   });
 }
@@ -57,21 +64,26 @@ export function createUser() {
         headers: {
           accept: "application/json",
           "content-type": "application/json",
-          "api-key": process.env.NEXT_PUBLIC_BREVO_API_KEY,
+          "api-key": process.env.NEXT_PUBLIC_BREVO_API_KEY || "",
         },
         body: JSON.stringify({
-          //TODO finish this one
           attributes: {
-            WANT2GETBOOKREAD: true, // TODO add this to the form
-            FRATERNITYSTATUS: "status here",
+            FIRSTNAME: data?.name,
+            WANT2GETBOOKREAD: data?.info?.bookReadNewsletter,
+            FRATERNITYSTATUS: data?.info?.areYouPartOfFraternity,
           },
           updateEnabled: false,
           email: data.email,
+          listIds: [4],
         }),
       };
 
-      await fetch("https://api.brevo.com/v3/contacts", options);
-
+      const response = await fetch(
+        "https://api.brevo.com/v3/contacts",
+        options,
+      );
+      const json = await response.json();
+      console.log(json);
       // (optional) send an email verification request
       await pb.collection("users").requestVerification(data.email);
 
@@ -93,7 +105,7 @@ export function loginUser() {
 
       if (authData) {
         queryClient.invalidateQueries({ queryKey: ["user"] });
-        router.replace("/content");
+        router.replace("/dienos_grudas");
       }
     },
   });
@@ -106,7 +118,7 @@ export function getUser() {
 
 export function isLoggedIn() {
   return useQuery({
-    queryKey: ["user"],
+    queryKey: ["user", pb.authStore.isValid],
     queryFn: async () => {
       return pb.authStore.isValid;
     },
@@ -126,11 +138,85 @@ export function logoutUser() {
   });
 }
 
+// pages:
+
 export function homepageQuery() {
   return useQuery({
     queryKey: ["homepage"],
     queryFn: async () => {
       return await pb.collection("pages").getOne("home");
+    },
+  });
+}
+
+export function aboutSistersQuery() {
+  return useQuery({
+    queryKey: ["sisters"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("apieseseris");
+    },
+  });
+}
+
+export function kgShortQuery() {
+  return useQuery({
+    queryKey: ["kgShort"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("trumpai");
+    },
+  });
+}
+
+export function kgDescriptionQuery() {
+  return useQuery({
+    queryKey: ["kgDescription"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("apie");
+    },
+  });
+}
+
+export function kgHistoryQuery() {
+  return useQuery({
+    queryKey: ["kgHistory"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("apiee");
+    },
+  });
+}
+
+export function kgModeratorQuery() {
+  return useQuery({
+    queryKey: ["kgModerator"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("apieee");
+    },
+  });
+}
+
+export function kgRecommendQuery() {
+  return useQuery({
+    queryKey: ["kgRecommend"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("rekom");
+    },
+  });
+}
+
+export function contactQuery() {
+  return useQuery({
+    queryKey: ["kgRecommend"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("kontakt");
+    },
+  });
+}
+
+export function donationQuery() {
+  return useQuery({
+    queryKey: ["donation"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("parama");
     },
   });
 }

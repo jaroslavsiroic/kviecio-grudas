@@ -109,12 +109,6 @@ const fields: FormField = {
     componentType: "input",
     checkError: nonEmptyAndChecked,
   },
-  readChallengeDescription: {
-    label: `Perskaičiau "Kviečio grūdo" programos aprašą. (Svarbu pačiai gerai suprasti, kur renkiesi dalyvauti)`,
-    required: true,
-    componentType: "checkbox",
-    checkError: nonEmptyAndChecked,
-  },
   agreeToAscesis: {
     label: `Sutinku stengtis laikytis visų "Kviečio grūdo" iššūkio punktų`,
     required: true,
@@ -128,13 +122,6 @@ const fields: FormField = {
     label: `Kuris "Kviečio grūdo" iššūkio punktas Tau atrodo pats sunkiausias? Kaip manai, kodėl?`,
     required: true,
     componentType: "input",
-    checkError: nonEmptyAndChecked,
-  },
-  agreeToCallAnchor: {
-    type: "text",
-    label: `Programos metu (iki šv. Velykų) įsipareigoju kiekvieną dieną susiskambinti su "kviečio grūdo" sese. Ištikimai laikysiuos šio įsipareigojimo, kuris liečia ne tik Mane, bet ir kitą asmenį.`,
-    required: true,
-    componentType: "checkbox",
     checkError: nonEmptyAndChecked,
   },
   areYouPartOfFraternity: {
@@ -167,14 +154,6 @@ const fields: FormField = {
     label: `Ko tikiesi iš šios programos?`,
     required: true,
     componentType: "input",
-    checkError: nonEmptyAndChecked,
-  },
-  spiritualFormationOwnResponsibility: {
-    type: "text",
-    placeholder: "Tavo atsakymas",
-    label: `"Kviečio grūdo" iššūkis yra priemonė (ne tikslas!), galinti padėti Tau gilinti santykį su Dievu ir tikėjimo sesėmis, programa taip pat yra įrankis, galintis padėti stiprinti Tavo valią. Suprantu, kad už savo augimą ir dvasinį tobulėjimą esu atsakinga visų pirma Aš pati.`,
-    required: true,
-    componentType: "checkbox",
     checkError: nonEmptyAndChecked,
   },
   anchorCorrectExpectations: {
@@ -215,6 +194,34 @@ const fields: FormField = {
     label: `Pakartok Slaptažodį`,
     required: true,
     componentType: "input",
+    checkError: nonEmptyAndChecked,
+  },
+  agreeToCallAnchor: {
+    type: "text",
+    label: `Programos metu (iki šv. Velykų) įsipareigoju kiekvieną dieną susiskambinti su "kviečio grūdo" sese. Ištikimai laikysiuos šio įsipareigojimo, kuris liečia ne tik Mane, bet ir kitą asmenį.`,
+    required: true,
+    componentType: "checkbox",
+    checkError: nonEmptyAndChecked,
+  },
+  spiritualFormationOwnResponsibility: {
+    type: "text",
+    placeholder: "Tavo atsakymas",
+    label: `"Kviečio grūdo" iššūkis yra priemonė (ne tikslas!), galinti padėti Tau gilinti santykį su Dievu ir tikėjimo sesėmis, programa taip pat yra įrankis, galintis padėti stiprinti Tavo valią. Suprantu, kad už savo augimą ir dvasinį tobulėjimą esu atsakinga visų pirma Aš pati.`,
+    required: true,
+    componentType: "checkbox",
+    checkError: nonEmptyAndChecked,
+  },
+  readChallengeDescription: {
+    label: `Perskaičiau "Kviečio grūdo" programos aprašą. (Svarbu pačiai gerai suprasti, kur renkiesi dalyvauti)`,
+    required: true,
+    componentType: "checkbox",
+    checkError: nonEmptyAndChecked,
+  },
+  bookReadNewsletter: {
+    placeholder: "Tavo atsakymas",
+    label: `Naujienlaiškyje norėčiau papildomai gauti knygų skaitynių.`,
+    required: false,
+    componentType: "checkbox",
     checkError: nonEmptyAndChecked,
   },
 };
@@ -357,7 +364,7 @@ const SignUp = () => {
     initialValues,
     validateOnChange: true,
     validate,
-    onSubmit: (values: FormData) => {
+    onSubmit: (values: any) => {
       const { name, email, password, passwordConfirm, ...info } = values;
       const data = {
         name,

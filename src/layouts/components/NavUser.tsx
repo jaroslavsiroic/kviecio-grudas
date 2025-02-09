@@ -27,7 +27,7 @@ const NavUser = () => {
                 <div className="leading-none max-md:hidden">
                   <div className="flex items-center">
                     <p className="block text-dark dark:text-darkmode-dark text-base truncate">
-                      {user?.firstName}
+                      {user?.name}
                     </p>
                     <svg
                       className={`w-5 text-dark dark:text-darkmode-dark dark:hover:text-darkmode-primary`}

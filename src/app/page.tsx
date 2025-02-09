@@ -6,7 +6,7 @@ import HeroSlider, { HeroPost } from "@/components/HeroSlider";
 import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
 import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 import config from "@/config/config.json";
-import { useTestimonials } from "@/lib/pocketbase";
+import { homepageQuery, useTestimonials } from "@/lib/pocketbase";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
@@ -49,10 +49,12 @@ const Home = () => {
   const { data: testimonials, isLoading: testimonialsLoading } =
     useTestimonials();
 
+  const { data: homepage, isLoading: homepageLoading } = homepageQuery();
+
   return (
     <>
       <SeoMeta />
-      <section>
+      {/* <section>
         <div className="container">
           <div className="bg-gradient py-10 rounded-md">
             <Suspense>
@@ -60,30 +62,38 @@ const Home = () => {
             </Suspense>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* category section  */}
-      <section className="section">
+      {/* <section className="section">
         <div className="container">
           <div className="text-center mb-6 md:mb-14">
             <h2>Collections</h2>
           </div>
-          <Suspense fallback={<SkeletonCategory />}>
-            {/* @ts-ignore */}
-            {/* <ShowCollections /> */}
+          <Suspense fallback={<SkeletonCategory />}> */}
+      {/* @ts-ignore */}
+      {/* <ShowCollections />
           </Suspense>
         </div>
-      </section>
+      </section> */}
 
       {/* Featured Products section  */}
       <section>
         <div className="container">
           <div className="text-center mb-6 md:mb-14">
-            <h2 className="mb-2">Featured Products</h2>
-            <p className="md:h5">Explore Today's Featured Picks!</p>
+            {/* <h2 className="mb-2">Featured Products</h2>
+            <p className="md:h5">Explore Today's Featured Picks!</p> */}
           </div>
           <Suspense fallback={<SkeletonFeaturedProducts />}>
-            {/* <ShowFeaturedProducts /> */}
+            {homepageLoading && (
+              <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
+            )}
+            {homepage && (
+              <div
+                className="ignore-css"
+                dangerouslySetInnerHTML={{ __html: homepage.content }}
+              />
+            )}
           </Suspense>
         </div>
       </section>
