@@ -29,7 +29,7 @@ const Footer = () => {
 
           {/* social share */}
           <ul className="social-icons social-icons-footer">
-            {social?.main.map((social: ISocial) => (
+            {/* {social?.main.map((social: ISocial) => (
               <li key={social.name}>
                 <a
                   aria-label={social.name}
@@ -41,7 +41,7 @@ const Footer = () => {
                   <DynamicIcon className="inline-block" icon={social.icon} />
                 </a>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
 

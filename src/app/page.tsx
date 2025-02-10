@@ -12,6 +12,8 @@ import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
 import { Suspense } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
+import fieldImg from "../../public/images/field.png";
+import fieldNoBgImg from "../../public/images/field_no_bg.png";
 
 // const ShowHeroSlider = async () => {
 //   const sliderImages = await getCollectionProducts({
@@ -54,6 +56,21 @@ const Home = () => {
   return (
     <>
       <SeoMeta />
+      <CallToAction
+        data={{
+          enable: true,
+          title: "Kviečio grūdo gavėnios programa moterims",
+          sub_title: "Tikėti. Laisvėti. Dalintis. Būti.",
+          // description: "description",
+          button: {
+            enable: true,
+            label: `Skaityti aprašymą`,
+            link: "/kviecio_grudas_aprasymas",
+          },
+          image: fieldNoBgImg,
+          imageSmall: fieldImg,
+        }}
+      />
       {/* <section>
         <div className="container">
           <div className="bg-gradient py-10 rounded-md">
@@ -103,8 +120,6 @@ const Home = () => {
       {testimonials && (
         <Testimonials title={"Atsiliepimai"} testimonials={testimonials} />
       )}
-
-      {/* <CallToAction data={callToAction} /> */}
     </>
   );
 };

@@ -10,12 +10,12 @@
       "hasChildren": true,
       "children": [
         {
-          "name": "Kviečio grūdo iššūkis trumpai",
-          "url": "/kviecio_grudas_trumpai"
-        },
-        {
           "name": "Programos aprašymas",
           "url": "/kviecio_grudas_aprasymas"
+        },
+        {
+          "name": "Kviečio grūdo iššūkis trumpai",
+          "url": "/kviecio_grudas_trumpai"
         },
         {
           "name": "Kaip atsirado Kviečio grūdas",
@@ -36,7 +36,7 @@
       "url": "/dienos_grudas"
     },
     {
-      "name": "Apie kongregacijos seseris",
+      "name": "Apie Nukryžiuotojo Kristaus kongregacijos seseris",
       "url": "/apie_seseris"
     },
     {
