@@ -219,7 +219,7 @@ const fields: FormField = {
   },
   bookReadNewsletter: {
     placeholder: "Tavo atsakymas",
-    label: `Naujienlaiškyje norėčiau papildomai gauti knygų skaitynių.`,
+    label: `Naujienlaiškyje norėčiau papildomai gauti knygų skaitinių.`,
     required: false,
     componentType: "checkbox",
     checkError: nonEmptyAndChecked,
