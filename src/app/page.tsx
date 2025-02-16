@@ -6,7 +6,7 @@ import HeroSlider, { HeroPost } from "@/components/HeroSlider";
 import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
 import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 import config from "@/config/config.json";
-import { homepageQuery, useTestimonials } from "@/lib/pocketbase";
+import { homepageQuery, usePartners, useTestimonials } from "@/lib/pocketbase";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
@@ -14,6 +14,7 @@ import { Suspense } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 import fieldImg from "../../public/images/field.png";
 import fieldNoBgImg from "../../public/images/field_no_bg.png";
+import PartnerLogos from "@/partials/PartnerLogos";
 
 // const ShowHeroSlider = async () => {
 //   const sliderImages = await getCollectionProducts({
@@ -51,7 +52,9 @@ const Home = () => {
   const { data: testimonials, isLoading: testimonialsLoading } =
     useTestimonials();
 
-  const { data: homepage, isLoading: homepageLoading } = homepageQuery();
+  const { data: partners, isLoading: partnersLoading } = usePartners();
+
+  // const { data: homepage, isLoading: homepageLoading } = homepageQuery();
 
   return (
     <>
@@ -95,11 +98,11 @@ const Home = () => {
       </section> */}
 
       {/* Featured Products section  */}
-      <section>
+      {/* <section>
         <div className="container">
           <div className="text-center mb-6 md:mb-14">
-            {/* <h2 className="mb-2">Featured Products</h2>
-            <p className="md:h5">Explore Today's Featured Picks!</p> */}
+            <h2 className="mb-2">Featured Products</h2>
+            <p className="md:h5">Explore Today's Featured Picks!</p>
           </div>
           <Suspense fallback={<SkeletonFeaturedProducts />}>
             {homepageLoading && (
@@ -113,13 +116,14 @@ const Home = () => {
             )}
           </Suspense>
         </div>
-      </section>
-      {testimonialsLoading && (
+      </section> */}
+      {(testimonialsLoading || partnersLoading) && (
         <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
       )}
       {testimonials && (
         <Testimonials title={"Atsiliepimai"} testimonials={testimonials} />
       )}
+      {partners && <PartnerLogos partners={partners} />}
     </>
   );
 };

@@ -124,7 +124,7 @@ const Header: React.FC = () => {
               htmlFor="nav-toggle"
               className="order-3 cursor-pointer flex items-center text-dark dark:text-white lg:order-1"
             >
-              <span className="mr-2 font-medium">Puslapiai</span>
+              <span className="mr-2 font-medium">Meniu</span>
               <button
                 id="nav-toggle"
                 className="focus:outline-none"

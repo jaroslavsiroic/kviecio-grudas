@@ -56,6 +56,15 @@ function isPositiveNumericCheck(value: string | boolean) {
   return "Turi būti skaičius";
 }
 
+function passwordCheck(value: string | boolean) {
+  if (typeof value === "string") {
+    return value.length >= 8
+      ? ""
+      : "Slaptažodis turi būti ilgesnis nei 8 simboliai";
+  }
+  return value ? "" : "Privalomas laukas";
+}
+
 const fields: FormField = {
   name: {
     type: "text",
@@ -127,7 +136,7 @@ const fields: FormField = {
   areYouPartOfFraternity: {
     type: "text",
     placeholder: "Tavo atsakymas",
-    label: `Ar jau turi moterų grupelę, su kuria dalyvausi "Kviečio grūdo" iššūkyje? (taip pat jei esi grupelės moderatorė - parašyk tai, kad programos metu galėtume Tave palaikyti. Jei neturi grupelės, bet norėtum, kad Tave pakviestų prisijungti - čia taip pat gali tai parašyti)`,
+    label: `Ar jau turi moterų grupelę, su kuria dalyvausi "Kviečio grūdo" iššūkyje? (jei esi grupelės moderatorė - parašyk tai, kad programos metu galėtume Tave palaikyti. Taip pat jei neturi grupelės, bet norėtum, kad Tave pakviestų prisijungti - čia taip pat gali tai parašyti. Atkreipiame dėmesį, kad papildomos grupelės yra formuojamos iki vasario 28 dienos ir jų dydis ribotas, tad nebūtinai visos norinčios turės galimybę prisijungti prie formuojamų grupelių. Dėl šios priežasties maloniai rekomenduojame inicijuoti ir burti grupeles savarankiškai)`,
     required: true,
     componentType: "input",
     checkError: nonEmptyAndChecked,
@@ -167,7 +176,7 @@ const fields: FormField = {
   groupCoordinatorDescription: {
     type: "text",
     placeholder: "Tavo atsakymas",
-    label: `Jei esi grupelės koordinatorė - šioje anketos skiltyje trumpai aprašyk savo grupelę (nurodyk dalyvių skaičių, ar pirmą kartą dalyvaujate "Kviečio grūdo" iššūkyje, ar susibūrėte tik šiam konkrečiam gavėnios laikui (o gal jau kuris laikas kartu keliaujate tikėjimo kelionę?),  ir pan.) .`,
+    label: `Jei esi grupelės koordinatorė - šioje anketos skiltyje trumpai aprašyk savo grupelę (dalyvių skaičius, ar pirmą kartą dalyvaujate, ar susibūrėte tik dabar, o gal jau kuris laikas keliaujate drauge tikėjimo kelionėje, etc.).`,
     required: false,
     componentType: "textarea",
     checkError: nonEmptyAndChecked,
@@ -186,7 +195,7 @@ const fields: FormField = {
     label: `Slaptažodis`,
     required: true,
     componentType: "input",
-    checkError: nonEmptyAndChecked,
+    checkError: passwordCheck,
   },
   passwordConfirm: {
     type: "password",
@@ -194,11 +203,11 @@ const fields: FormField = {
     label: `Pakartok Slaptažodį`,
     required: true,
     componentType: "input",
-    checkError: nonEmptyAndChecked,
+    checkError: passwordCheck,
   },
   agreeToCallAnchor: {
     type: "text",
-    label: `Programos metu (iki šv. Velykų) įsipareigoju kiekvieną dieną susiskambinti su "kviečio grūdo" sese. Ištikimai laikysiuos šio įsipareigojimo, kuris liečia ne tik Mane, bet ir kitą asmenį.`,
+    label: `Programos metu (iki šv. Velykų) įsipareigoju kiekvieną dieną susiskambinti su "Kviečio grūdo" sese. Ištikimai laikysiuosi šio įsipareigojimo, kuris liečia ne tik mane, bet ir kitą asmenį bei bendrą grupelės dinamiką. `,
     required: true,
     componentType: "checkbox",
     checkError: nonEmptyAndChecked,
@@ -206,7 +215,7 @@ const fields: FormField = {
   spiritualFormationOwnResponsibility: {
     type: "text",
     placeholder: "Tavo atsakymas",
-    label: `"Kviečio grūdo" iššūkis yra priemonė (ne tikslas!), galinti padėti Tau gilinti santykį su Dievu ir tikėjimo sesėmis, programa taip pat yra įrankis, galintis padėti stiprinti Tavo valią. Suprantu, kad už savo augimą ir dvasinį tobulėjimą esu atsakinga visų pirma Aš pati.`,
+    label: `"Kviečio grūdo" iššūkis yra priemonė (ne tikslas!), galinti padėti Tau gilinti santykį su Dievu ir tikėjimo sesėmis. Programa taip pat yra įrankis, galintis padėti stiprinti Tavo valią. Suprantu, kad už savo augimą ir dvasinį tobulėjimą esu atsakinga visų pirma aš pati. Taip pat suprantu, kad nedalyvaudama programoje pilna apimtimi apriboju savo galimybes ir negaliu tikėtis pilnai patirti tai, kas yra aprašoma Kviečio grūdo iššūkyje. `,
     required: true,
     componentType: "checkbox",
     checkError: nonEmptyAndChecked,
@@ -219,7 +228,7 @@ const fields: FormField = {
   },
   bookReadNewsletter: {
     placeholder: "Tavo atsakymas",
-    label: `Naujienlaiškyje norėčiau papildomai gauti knygų skaitinių.`,
+    label: `Naujienlaiškyje norėčiau papildomai gauti dienos skaitinius.`,
     required: false,
     componentType: "checkbox",
     checkError: nonEmptyAndChecked,
@@ -387,6 +396,17 @@ const SignUp = () => {
               <div className="mb-14 text-center">
                 <h2 className="max-md:h1 md:mb-2">Susikurk paskyrą</h2>
                 <p className="md:text-lg">Ir prisijunk prie iššūkio!</p>
+                <p className="md:text-lg mt-4">
+                  Prieš pildydama registracijos anketą susipažink su Kviečio
+                  grūdo iššūkiu. <br />
+                  Jo aprašymą rasi{" "}
+                  <Link
+                    className="underline font-medium text-dark dark:text-darkmode-dark"
+                    href="/kviecio_grudas_aprasymas"
+                  >
+                    čia
+                  </Link>
+                </p>
               </div>
 
               <form onSubmit={formik.handleSubmit}>
@@ -458,25 +478,25 @@ const SignUp = () => {
 
               <div className="flex gap-x-2 text-sm md:text-base mt-6">
                 <p className="text-light dark:text-darkmode-light">
-                  I have read and agree to the
+                  Perskaičiau ir sutinku su
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"
-                  href={"/terms-services"}
+                  href={"/privacy-policy"}
                 >
-                  Terms & Conditions
+                  Privatumo politika
                 </Link>
               </div>
 
               <div className="flex gap-x-2 text-sm md:text-base mt-2">
                 <p className="text-light dark:text-darkmode-light">
-                  Have an account?
+                  Turi paskyrą?
                 </p>
                 <Link
                   className="underline font-medium text-dark dark:text-darkmode-dark"
                   href={"/login"}
                 >
-                  Login
+                  Prisijungti
                 </Link>
               </div>
             </div>

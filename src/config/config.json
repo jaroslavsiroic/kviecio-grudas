@@ -7,8 +7,8 @@
     "favicon": "/images/favicon.ico",
     "logo_text": "Kviečio grūdas",
     "logo": "/images/logo.png",
-    "logo_darkmode": "/images/logo.png",
-    "logo_width": "125",
+    "logo_darkmode": "/images/logo_darkmode.png",
+    "logo_width": "86",
     "logo_height": "50"
   },
 

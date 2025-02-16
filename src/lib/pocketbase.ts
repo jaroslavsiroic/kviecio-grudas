@@ -10,7 +10,7 @@ import {
 import PocketBase from "pocketbase";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Testimonial } from "@/types";
+import { Partner, Testimonial } from "@/types";
 import { config } from "process";
 
 // initialise client
@@ -28,7 +28,7 @@ export function useDailyMeditation(date: string) {
             `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
           );
       } else {
-        toast.warning("Prašome prisijungti, kad peržiurėti dienos grūdą");
+        toast.warning("Norėdami peržiūrėti dienos grūdą, prisijunkite");
         router.replace("/login");
         return Promise.resolve(null);
       }
@@ -43,6 +43,19 @@ export function useTestimonials() {
       return await pb.collection("testimonials").getFullList();
     },
   });
+}
+
+export function usePartners() {
+  return useQuery<Partner[]>({
+    queryKey: ["partners"],
+    queryFn: async () => {
+      return await pb.collection("partners").getFullList();
+    },
+  });
+}
+
+export function getFileURL(record: any, fileName: string) {
+  return pb.files.getURL(record, fileName);
 }
 
 export function createUser() {
@@ -74,7 +87,7 @@ export function createUser() {
           },
           updateEnabled: false,
           email: data.email,
-          listIds: [4],
+          listIds: [3],
         }),
       };
 
@@ -217,6 +230,15 @@ export function donationQuery() {
     queryKey: ["donation"],
     queryFn: async () => {
       return await pb.collection("pages").getOne("parama");
+    },
+  });
+}
+
+export function privacyPolicyQuery() {
+  return useQuery({
+    queryKey: ["privacyPolicy"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("privacypolicy");
     },
   });
 }

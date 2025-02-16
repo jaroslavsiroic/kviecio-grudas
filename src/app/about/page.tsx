@@ -84,12 +84,12 @@ const About = () => {
         </div>
       </section>
 
-      {testimonials_section_enable && (
+      {/* {testimonials_section_enable && (
         <Testimonials
           title={testimonials_section_title!}
           testimonials={testimonials!}
         />
-      )}
+      )} */}
 
       <section>
         <div className="container">

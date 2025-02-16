@@ -60,12 +60,8 @@
   ],
   "footerCopyright": [
     {
-      "name": "Privacy & Policy",
+      "name": "Privatumo politika",
       "url": "/privacy-policy"
-    },
-    {
-      "name": "Terms of Service",
-      "url": "/terms-services"
     }
   ]
 }

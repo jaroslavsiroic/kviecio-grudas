@@ -90,10 +90,18 @@ export type Feature = {
 };
 
 export type Testimonial = {
+  id: string;
   name: string;
   designation: string;
   avatar: string;
   content: string;
+};
+
+export type Partner = {
+  id: string;
+  name: string;
+  logo: string;
+  website: string;
 };
 
 export type Banner = {
