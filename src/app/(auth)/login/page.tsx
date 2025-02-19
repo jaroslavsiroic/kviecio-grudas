@@ -39,7 +39,6 @@ const Login = () => {
       mutateLoginUser(values);
     },
   });
-  console.log(error);
   return (
     <>
       <section className="section">
@@ -128,6 +127,14 @@ const Login = () => {
                   href={"/sign-up"}
                 >
                   Registruotis
+                </Link>
+              </div>
+              <div className="flex gap-x-2 text-sm md:text-base mt-6">
+                <Link
+                  className="underline font-medium text-dark dark:text-darkmode-dark"
+                  href={"/reset-password"}
+                >
+                  Pamiršau savo slaptažodį
                 </Link>
               </div>
             </div>

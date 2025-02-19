@@ -1,11 +1,13 @@
 {
-  "name": "commerceplate",
-  "version": "1.1.3",
-  "description": "Shopify Storefront Boilerplate with Next.js, Tailwind CSS, and Shopify SDK",
-  "author": "zeon.studio",
+  "name": "kviecio-grudas",
+  "version": "1.0",
+  "description": "Kviecio grudo gavenios programa moterims",
+  "author": "Jaroslav Siroic",
   "license": "MIT",
   "packageManager": "yarn@1.22.19",
   "scripts": {
+    "deploy:dev": "./build-dev.sh",
+    "deploy:prod": "./build-prod.sh",
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",

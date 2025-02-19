@@ -17,7 +17,7 @@ const Page = () => {
   const router = useRouter();
   const params = useSearchParams();
   const date = params.get("d") ?? format(new Date(), "yyyy-MM-dd");
-  const { data, isLoading, isError } = useDailyMeditation(date);
+  const { data, isLoading, error } = useDailyMeditation(date);
 
   return (
     <>
@@ -27,6 +27,14 @@ const Page = () => {
           <div className="content">
             {isLoading && (
               <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
+            )}
+            {error && (
+              <div className="text-center">
+                <p className="h2">
+                  Čia bus galima rasti dienos Evangeliją ir pagalbinius
+                  klausimus asmeninei maldai.
+                </p>
+              </div>
             )}
             {data && (
               <div

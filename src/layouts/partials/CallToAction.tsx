@@ -33,7 +33,7 @@ const CallToAction = ({ data }: { data: Call_to_action }) => {
 
                   {data.button.enable && (
                     <Link
-                      className="btn btn-md md:btn-lg btn-primary font-medium"
+                      className="btn btn-md md:btn-lg btn-primary font-medium normal-case"
                       href={data.button.link}
                     >
                       {data.button.label}

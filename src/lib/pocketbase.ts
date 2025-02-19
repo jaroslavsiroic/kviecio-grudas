@@ -96,12 +96,26 @@ export function createUser() {
         options,
       );
       const json = await response.json();
-      console.log(json);
       // (optional) send an email verification request
       await pb.collection("users").requestVerification(data.email);
 
       toast.success("Naudotojas sukurtas sėkmingai");
       router.replace("/");
+    },
+  });
+}
+
+export function passwordResetMutation() {
+  const router = useRouter();
+  return useMutation({
+    mutationFn: async (data: { email: string }) => {
+      const response = await pb
+        .collection("users")
+        .requestPasswordReset(data.email);
+      if (response) {
+        toast.success("Laiškas išiųstas į " + data?.email);
+        router.replace("/login");
+      }
     },
   });
 }
