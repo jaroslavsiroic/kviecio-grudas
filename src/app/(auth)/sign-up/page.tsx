@@ -475,8 +475,12 @@ const SignUp = () => {
                   <p className="text-red-500 text-s italic">{`Registracijos klaidų skaičius: ${Object.keys(formik.errors).length}`}</p>
                 ) : null}
               </form>
-
               <div className="flex gap-x-2 text-sm md:text-base mt-6">
+                <p className="text-light dark:text-darkmode-light">
+                  Užsiregistruodamas sutinku gauti naujienlaiškį
+                </p>
+              </div>
+              <div className="flex gap-x-2 text-sm md:text-base mt-2">
                 <p className="text-light dark:text-darkmode-light">
                   Perskaičiau ir sutinku su
                 </p>
