@@ -89,7 +89,7 @@ const Login = () => {
                 </div>
                 {error ? (
                   <p className="font-medium text-red-500 truncate mt-2">
-                    {JSON.stringify(error)}
+                    {error?.response?.message}
                   </p>
                 ) : null}
 

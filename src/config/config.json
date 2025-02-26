@@ -3,7 +3,7 @@
     "title": "Kviečio grūdas",
     "base_url": "https://kvieciogrudas.com/",
     "base_path": "/",
-    "trailing_slash": false,
+    "trailing_slash": true,
     "favicon": "/images/favicon.ico",
     "logo_text": "Kviečio grūdas",
     "logo": "/images/logo.png",

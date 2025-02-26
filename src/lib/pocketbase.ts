@@ -22,11 +22,15 @@ export function useDailyMeditation(date: string) {
     queryKey: ["daily_meditation"],
     queryFn: async () => {
       if (pb.authStore.isValid) {
-        return await pb
-          .collection("dienos_grudas")
-          .getFirstListItem(
-            `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
-          );
+        try {
+          return await pb
+            .collection("dienos_grudas")
+            .getFirstListItem(
+              `date >= '${date} 00:00:00.000' && date <= '${date} 23:59:59.999'`,
+            );
+        } catch (error) {
+          return await pb.collection("dienos_grudas").getOne("contentdefaults");
+        }
       } else {
         toast.warning("Norėdami peržiūrėti dienos grūdą, prisijunkite");
         router.replace("/login");
@@ -124,8 +128,12 @@ export function loginUser() {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  return useMutation({
-    mutationFn: async (data: { email: string; password: string }) => {
+  return useMutation<
+    void,
+    { response: { code: number; message: string } },
+    { email: string; password: string }
+  >({
+    mutationFn: async (data) => {
       const authData = await pb
         .collection("users")
         .authWithPassword(data.email, data.password);

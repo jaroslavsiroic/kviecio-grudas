@@ -11,18 +11,6 @@ const nextConfig = {
   output: "export",
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "cdn.shopify.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "https://picsum.photos",
-        pathname: "/**",
-      },
-    ],
   },
   eslint: {
     ignoreDuringBuilds: true,

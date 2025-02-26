@@ -477,7 +477,7 @@ const SignUp = () => {
               </form>
               <div className="flex gap-x-2 text-sm md:text-base mt-6">
                 <p className="text-light dark:text-darkmode-light">
-                  Užsiregistruodamas sutinku gauti naujienlaiškį
+                  Užsiregistruodamas sutinku gauti Kviečio grūdo naujienlaiškį
                 </p>
               </div>
               <div className="flex gap-x-2 text-sm md:text-base mt-2">
