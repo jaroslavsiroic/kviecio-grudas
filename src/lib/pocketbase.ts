@@ -10,7 +10,7 @@ import {
 import PocketBase from "pocketbase";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { Partner, Testimonial } from "@/types";
+import { Partner, Promo, Testimonial } from "@/types";
 import { config } from "process";
 
 // initialise client
@@ -54,6 +54,15 @@ export function usePartners() {
     queryKey: ["partners"],
     queryFn: async () => {
       return await pb.collection("partners").getFullList();
+    },
+  });
+}
+
+export function usePromos() {
+  return useQuery<Promo[]>({
+    queryKey: ["promos"],
+    queryFn: async () => {
+      return await pb.collection("promos").getFullList();
     },
   });
 }

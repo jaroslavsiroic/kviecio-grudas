@@ -104,6 +104,14 @@ export type Partner = {
   website: string;
 };
 
+export type Promo = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image: string;
+};
+
 export type Banner = {
   title: string;
   image: string;

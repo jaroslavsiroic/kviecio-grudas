@@ -6,7 +6,13 @@ import HeroSlider, { HeroPost } from "@/components/HeroSlider";
 import SkeletonCategory from "@/components/skeleton/SkeletonCategory";
 import SkeletonFeaturedProducts from "@/components/skeleton/SkeletonFeaturedProducts";
 import config from "@/config/config.json";
-import { homepageQuery, usePartners, useTestimonials } from "@/lib/pocketbase";
+import {
+  getFileURL,
+  homepageQuery,
+  usePartners,
+  usePromos,
+  useTestimonials,
+} from "@/lib/pocketbase";
 import CallToAction from "@/partials/CallToAction";
 import SeoMeta from "@/partials/SeoMeta";
 import Testimonials from "@/partials/Testimonials";
@@ -15,6 +21,8 @@ import { BiLoaderAlt } from "react-icons/bi";
 import fieldImg from "../../public/images/field.png";
 import fieldNoBgImg from "../../public/images/field_no_bg.png";
 import PartnerLogos from "@/partials/PartnerLogos";
+import { Promo } from "@/types";
+import ImageFallback from "@/helpers/ImageFallback";
 
 // const ShowHeroSlider = async () => {
 //   const sliderImages = await getCollectionProducts({
@@ -53,6 +61,7 @@ const Home = () => {
     useTestimonials();
 
   const { data: partners, isLoading: partnersLoading } = usePartners();
+  const { data: promos } = usePromos();
 
   // const { data: homepage, isLoading: homepageLoading } = homepageQuery();
 
@@ -74,49 +83,54 @@ const Home = () => {
           imageSmall: fieldImg,
         }}
       />
-      {/* <section>
-        <div className="container">
-          <div className="bg-gradient py-10 rounded-md">
-            <Suspense>
-              <HeroSlider posts={products} />
-            </Suspense>
-          </div>
-        </div>
-      </section> */}
-
-      {/* category section  */}
-      {/* <section className="section">
-        <div className="container">
-          <div className="text-center mb-6 md:mb-14">
-            <h2>Collections</h2>
-          </div>
-          <Suspense fallback={<SkeletonCategory />}> */}
-      {/* @ts-ignore */}
-      {/* <ShowCollections />
-          </Suspense>
-        </div>
-      </section> */}
-
-      {/* Featured Products section  */}
-      {/* <section>
-        <div className="container">
-          <div className="text-center mb-6 md:mb-14">
-            <h2 className="mb-2">Featured Products</h2>
-            <p className="md:h5">Explore Today's Featured Picks!</p>
-          </div>
-          <Suspense fallback={<SkeletonFeaturedProducts />}>
-            {homepageLoading && (
-              <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
-            )}
-            {homepage && (
+      {promos && (
+        <section>
+          <div className="container">
+            {promos?.map((promo: Promo, index: number) => (
               <div
-                className="ignore-css"
-                dangerouslySetInnerHTML={{ __html: homepage.content }}
-              />
-            )}
-          </Suspense>
-        </div>
-      </section> */}
+                className={`lg:flex gap-8 mt-14 lg:mt-28`}
+                key={promo?.title}
+              >
+                {index % 2 === 0 ? (
+                  <>
+                    <ImageFallback
+                      className="rounded-md mx-auto"
+                      src={getFileURL(promo, promo.image)}
+                      width={536}
+                      height={449}
+                      alt={promo?.title}
+                    />
+                    <div className="mt-10 lg:mt-0">
+                      <h2>{promo?.title}</h2>
+                      <p
+                        className="mt-4 text-light leading-7"
+                        dangerouslySetInnerHTML={{ __html: promo?.description }}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <h2>{promo.title}</h2>
+                      <p
+                        className="mt-4 text-light leading-7"
+                        dangerouslySetInnerHTML={{ __html: promo?.description }}
+                      />
+                    </div>
+                    <ImageFallback
+                      className="rounded-md mx-auto mt-10 lg:mt-0"
+                      src={getFileURL(promo, promo.image)}
+                      width={536}
+                      height={449}
+                      alt={promo.title}
+                    />
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
       {(testimonialsLoading || partnersLoading) && (
         <BiLoaderAlt className={`animate-spin mx-auto`} size={26} />
       )}
