@@ -26,6 +26,10 @@
           "url": "/kviecio_grudas_moderatorems"
         },
         {
+          "name": "Kaip melstis su Šventuoju Raštu",
+          "url": "/malda_su_rastu"
+        },
+        {
           "name": "Rekomenduojame",
           "url": "/kviecio_grudas_rekomendacijos"
         }

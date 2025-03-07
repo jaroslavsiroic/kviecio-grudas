@@ -3,6 +3,8 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+./build_env_update_prod.sh
+
 # Build the Next.js project
 yarn build
 

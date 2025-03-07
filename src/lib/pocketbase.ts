@@ -238,6 +238,15 @@ export function kgModeratorQuery() {
   });
 }
 
+export function kgPrayWithBibleQuery() {
+  return useQuery({
+    queryKey: ["kgPrayWithBible"],
+    queryFn: async () => {
+      return await pb.collection("pages").getOne("biblijosmalda");
+    },
+  });
+}
+
 export function kgRecommendQuery() {
   return useQuery({
     queryKey: ["kgRecommend"],

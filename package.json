@@ -8,7 +8,8 @@
   "scripts": {
     "deploy:dev": "./build-dev.sh",
     "deploy:prod": "./build-prod.sh",
-    "dev": "next dev",
+    "dev": "./build_env_update_dev.sh && next dev",
+    "prod": "./build_env_update_prod.sh && next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
