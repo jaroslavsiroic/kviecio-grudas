@@ -84,31 +84,6 @@ export function createUser() {
       info: any;
     }) => {
       await pb.collection("users").create(data);
-
-      const options = {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "content-type": "application/json",
-          "api-key": process.env.NEXT_PUBLIC_BREVO_API_KEY || "",
-        },
-        body: JSON.stringify({
-          attributes: {
-            FIRSTNAME: data?.name,
-            WANT2GETBOOKREAD: data?.info?.bookReadNewsletter,
-            FRATERNITYSTATUS: data?.info?.areYouPartOfFraternity,
-          },
-          updateEnabled: false,
-          email: data.email,
-          listIds: [3],
-        }),
-      };
-
-      const response = await fetch(
-        "https://api.brevo.com/v3/contacts",
-        options,
-      );
-      const json = await response.json();
       // (optional) send an email verification request
       await pb.collection("users").requestVerification(data.email);
 
