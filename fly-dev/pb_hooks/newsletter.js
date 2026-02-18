@@ -2,18 +2,22 @@ const config = require(`${__hooks}/config.js`);
 
 module.exports = {
   subscribe: (record) => {
-    $app.logger().info("newsletter sub", record);
     const apiKey = config.val("brevoapikey");
     const listId = config.val("brevolist");
 
     if (!apiKey) return;
 
-    // In 0.24, JSON fields (like 'info') are automatically
-    // converted to JS objects when using .get()
-    const info = record.get("info") || {};
+    const info = new DynamicModel({
+      bookReadNewsletter: true,
+      areYouPartOfFraternity: "",
+    });
+
+    // 2. Unmarshal the field from the record into your model
+    // This fills 'result' with the data from "someJsonField"
+    record.unmarshalJSONField("info", info);
 
     try {
-      const res = $http.send({
+      const newsletterData = {
         url: "https://api.brevo.com/v3/contacts",
         method: "POST",
         headers: {
@@ -31,7 +35,10 @@ module.exports = {
           listIds: [parseInt(listId || 3)],
           updateEnabled: true,
         }),
-      });
+      };
+      const res = $http.send(newsletterData);
+
+      $app.logger().info("newsletter sub", newsletterData);
 
       if (res.statusCode >= 400) {
         $app.logger().debug("Brevo Response Error:", res.raw);
