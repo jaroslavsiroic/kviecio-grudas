@@ -19,7 +19,8 @@ export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 export function useDailyMeditation(date: string) {
   const router = useRouter();
   return useQuery({
-    queryKey: ["daily_meditation"],
+    queryKey: ["daily_meditation", date],
+    staleTime: 15 * 60 * 1000, // Data remains "fresh" for 15 minutes
     queryFn: async () => {
       if (pb.authStore.isValid) {
         try {

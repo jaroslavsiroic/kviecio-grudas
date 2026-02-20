@@ -12,6 +12,11 @@ import { ReactNode } from "react";
 import { Slide, toast, ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 10, // 10 minutes
+    },
+  },
   queryCache: new QueryCache({
     onError: (error) => {
       toast.error(error?.message);
