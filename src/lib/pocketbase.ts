@@ -18,11 +18,14 @@ export const pb = new PocketBase(process.env.NEXT_PUBLIC_POCKETBASE_URL);
 
 export function useDailyMeditation(date: string) {
   const router = useRouter();
+  const { data: loggedIn, isLoading: authLoading } = isLoggedIn();
+
   return useQuery({
-    queryKey: ["daily_meditation", date],
-    staleTime: 15 * 60 * 1000, // Data remains "fresh" for 15 minutes
+    queryKey: ["daily_meditation", date, loggedIn],
+    enabled: !authLoading, // Only run the query when auth state is resolved
     queryFn: async () => {
-      if (pb.authStore.isValid) {
+      // It's crucial to check the authstate again inside
+      if (loggedIn) {
         try {
           return await pb
             .collection("dienos_grudas")
@@ -142,6 +145,7 @@ export function isLoggedIn() {
     queryFn: async () => {
       return pb.authStore.isValid;
     },
+    staleTime: Infinity, 
   });
 }
 

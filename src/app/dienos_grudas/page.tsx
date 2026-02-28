@@ -9,7 +9,7 @@ import { RegularPage } from "@/types";
 import { format, addDays, subDays, differenceInDays } from "date-fns";
 import { lt } from "date-fns/locale";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { BiLoaderAlt } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
@@ -23,11 +23,15 @@ const Page = () => {
   const [currentDate, setCurrentDate] = useState(
     params.get("d") ? new Date(params.get("d") ?? "") : today,
   );
-  const currentDateText = format(currentDate, "MMMM d", { locale: lt });
-  const todayDateText = format(today, "MMMM d", { locale: lt });
-  const { data, isLoading, error } = useDailyMeditation(
-    format(currentDate, "yyyy-MM-dd"),
-  );
+  const formatted = useMemo(() => {
+    return {
+      currentDateText: format(currentDate, "MMMM d", { locale: lt }),
+      todayDateText: format(today, "MMMM d", { locale: lt }),
+      currentDate: format(currentDate, "yyyy-MM-dd"),
+    };
+  }, [today, currentDate]);
+
+  const { data, isLoading, error } = useDailyMeditation(formatted.currentDate);
 
   return (
     <>
@@ -48,17 +52,19 @@ const Page = () => {
             size={35}
           />
         </span>
-        <p className="h2">{currentDateText}</p>
+        <p className="h2">{formatted.currentDateText}</p>
         <span
           className="cursor-pointer"
           onClick={() => {
-            if (currentDateText !== todayDateText) {
+            if (formatted.currentDateText !== formatted.todayDateText) {
               setCurrentDate(addDays(currentDate, 1));
             }
           }}
         >
           <FaCircleChevronRight
-            opacity={currentDateText !== todayDateText ? 1 : 0.35}
+            opacity={
+              formatted.currentDateText !== formatted.todayDateText ? 1 : 0.35
+            }
             size={35}
           />
         </span>

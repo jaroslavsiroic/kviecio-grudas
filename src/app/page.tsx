@@ -23,6 +23,10 @@ import fieldNoBgImg from "../../public/images/field_no_bg.png";
 import PartnerLogos from "@/partials/PartnerLogos";
 import { Promo } from "@/types";
 import ImageFallback from "@/helpers/ImageFallback";
+import { format } from "date-fns";
+import { lt } from "date-fns/locale";
+import Link from "next/link";
+import { isLoggedIn } from "@/lib/pocketbase";
 
 // const ShowHeroSlider = async () => {
 //   const sliderImages = await getCollectionProducts({
@@ -62,12 +66,50 @@ const Home = () => {
 
   const { data: partners, isLoading: partnersLoading } = usePartners();
   const { data: promos } = usePromos();
+  const { data: loggedIn } = isLoggedIn();
 
   // const { data: homepage, isLoading: homepageLoading } = homepageQuery();
 
   return (
     <>
       <SeoMeta />
+      {loggedIn && (
+        <section className="section">
+          <div className="container">
+            <div className="bg-body dark:bg-darkmode-body shadow-lg rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-border dark:border-darkmode-border">
+              {/* Left Side: Rectangular Date */}
+              <div className="flex flex-col items-center justify-center bg-transparent border-2 border-dark/10 dark:border-darkmode-dark/20 text-dark dark:text-darkmode-dark rounded-xl p-4 w-32 h-32 flex-shrink-0 shadow-sm transform hover:scale-105 transition-transform duration-300">
+                <span className="text-sm font-medium uppercase tracking-widest opacity-80">
+                  {format(new Date(), "MMM", { locale: lt })}
+                </span>
+                <span className="text-6xl font-bold leading-none my-1">
+                  {format(new Date(), "d")}
+                </span>
+                <span className="text-sm font-medium opacity-80">
+                  {format(new Date(), "yyyy")}
+                </span>
+              </div>
+
+              {/* Right Side: Text & CTA */}
+              <div className="text-center md:text-left flex-1">
+                <h2 className="h2 mb-4 text-dark dark:text-darkmode-dark">
+                  Dienos grūdas
+                </h2>
+                <p className="mb-6 text-lg text-text dark:text-darkmode-text">
+                  Kviečiame perskaityti šios dienos Evangeliją ir asmeninę
+                  meditaciją.
+                </p>
+                <Link
+                  href="/dienos_grudas"
+                  className="btn btn-primary font-medium px-8 py-3 text-lg hover:shadow-lg transition-shadow duration-300"
+                >
+                  Skaityti dienos Grūdą
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
       <CallToAction
         data={{
           enable: true,
