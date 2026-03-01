@@ -96,8 +96,8 @@ const Home = () => {
                   Dienos grūdas
                 </h2>
                 <p className="mb-6 text-lg text-text dark:text-darkmode-text">
-                  Kviečiame perskaityti šios dienos Evangeliją ir asmeninę
-                  meditaciją.
+                  Kviečiame skaityti šios dienos Evangeliją ir pagalbinius
+                  klausimus asmeninei maldai
                 </p>
                 <Link
                   href="/dienos_grudas"
